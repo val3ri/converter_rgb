@@ -1,0 +1,159 @@
+<html>
+<head>
+    <!-- Import bootstrap static css files -->
+    <link rel="stylesheet" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
+    <script src="js/validitation.js"></script>
+
+    <!-- CSS -->
+    <style>
+/*div{
+	background-color: red;
+}*/
+div.row {
+	/* background of the row */
+	background-color: powderblue;
+	/*centes all texts objects in the rows */
+	text-align: center; 
+	/*vertical-align: middle;*/
+	/*margin: auto;*/
+}
+div.row3{
+	background-color: green;
+	text-align: center;
+}
+
+
+}
+select{
+	
+	text-align-last: center;
+	/*background-color: red;*/
+}
+	
+
+
+
+    </style>
+
+</head>
+<body>
+<div class="container-fluid"> 
+	<!-- RGB to ... -->
+    <div class="row">
+        <div><h3>RGB to ...</h3></div>
+    </div>
+
+
+    <!-- R G B values Row -->
+    <div class="row">
+        <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa  -->
+        <!-- R value Row -->
+        <div class="col-xs-4">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> R: </label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="rbg_r_value" value="0">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--G value Row -->
+        <div class="col-xs-4">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> G: </label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control " id="rbg_g_value" value="0">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- B value Row -->
+        <div class="col-xs-4">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> B: </label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control " id="rbg_b_value" value="0">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--  Option  -->
+    <div class="row">
+        <div class="col-xs-6 col-xs-offset-3">
+            <div>
+                <select id="rgb_options" class="form-control" onchange="fromRGBto()">
+                    <!-- class="selectpicker"  dir='auto'-->
+                    <option>HSL</option>
+                    <option>HSV</option>
+                    <option>CMY</option>
+                    <option>sRBG</option>
+                </select>
+            </div>
+        </div>
+
+    </div>
+    <!-- Result value Row -->
+    <div class="row">
+        <h4>
+            <span>Result:</span>
+            <span id="rgb_result"> 0 </span>
+        </h4>
+    </div>
+
+    <!-- sRGB to CIE -->
+    <div class="row3">
+    	<div><h3>sRGB to CIE XYZ</h3></div>
+    
+    <!-- R G B values -->
+    
+        <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa  -->
+        <!-- R value -->
+        <div class="col-xs-4">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> R: </label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="rbg_r_value" value="0">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--G value -->
+        <div class="col-md-4">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> G: </label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control " id="rbg_g_value" value="0">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- B value  -->
+        <div class="col-xs-4">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> B: </label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control " id="rbg_b_value" value="0">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+   
+</div>
+
+
+<!-- Import bootstrap static javascript files -->
+<script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>

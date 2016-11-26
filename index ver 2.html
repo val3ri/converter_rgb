@@ -1,0 +1,95 @@
+<html>
+<head>
+  <!-- Import bootstrap static css files -->
+  <link rel="stylesheet" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="lib/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
+  <script src="js/validitation.js"> </script>
+
+</head>
+<body>
+  <div class="container-fluid"> <!-- 'fluid' adde d-->
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4 text-center"><h3>RGB to ...</h3></div>
+    </div>
+
+
+      <!-- R G B values Row -->
+      <div class="row">
+        <!-- R value Row -->
+        <div class="col-md-4">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label class="col-sm-3 control-label"> R: </label>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" id="rbg_r_value" value="0">
+              </div>
+            </div>
+          </form>
+        </div>
+        <!--G value Row -->
+        <div class="col-md-4">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label class="col-sm-3 control-label"> G: </label>
+              <div class="col-sm-3">
+                <input type="text" class="form-control " id="rbg_g_value" value="0">
+             </div>
+            </div>
+          </form>
+        </div>
+        <!-- B value Row -->
+        <div class="col-md-4">
+          <form class="form-horizontal">
+            <div class="form-group">
+             <label class="col-sm-3 control-label"> B: </label>
+              <div class="col-sm-3">
+              <input type="text" class="form-control " id="rbg_b_value" value="0">
+              </div>
+            </div>
+          </form>
+        </div>
+    </div>
+    <!--  Option  -->
+    <div class="row">
+      
+      <div class="col-md-4 col-md-offset-4">
+        <select id="rgb_options" class="form-control" onchange="fromRGBto()">
+          <option>HSL</option>
+          <option>HSV</option>
+          <option>CMY</option>
+          <option>sRBG</option>
+        </select>
+      </div>
+    
+    </div>
+     <!-- Result value Row -->
+    <div class="row">
+       <div class="col-md-4 col-md-offset-4">
+        <h4 class='text-center'>
+        <span >Result:</span>
+        <span  id="rgb_result"> 0 </span>
+        </h4>
+        
+      </div>
+    </div>
+
+
+
+
+
+
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">sRGB to CIE XYZ</div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">CIE XYZ to ...</div>
+    </div>
+  </div>
+
+
+  <!-- Import bootstrap static javascript files -->
+  <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"> </script>
+
+
+</body>
+</html>
