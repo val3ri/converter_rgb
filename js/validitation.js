@@ -165,7 +165,9 @@ function fromCIEXYZto() {
         var a = 500 * (x - y)
         var b = 200 * (y - z)
 
-        assert("l:" + l + " a:" + a + " b:" + b)
+        document.getElementById("xyzresult").innerHTML = "".concat("L:", l.toString(),
+            "; a:", a.toString(),
+            "; b:", b.toString());
     }
     else if (option == "CIELuv") {
         x = x / 255;
@@ -178,6 +180,10 @@ function fromCIEXYZto() {
         var l = 116 * (Math.pow(y / 100), 1 / 3) - 16;
         var u = 116 * l * (u1 - 0.2009);
         var v = 13 * l * (v1 - 0.4610);
+
+        document.getElementById("xyzresult").innerHTML = "".concat("L:", l.toString(),
+            "; u:", u.toString(),
+            "; v:", v.toString());
     }
 
 
