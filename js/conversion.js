@@ -97,22 +97,29 @@ function fromRGBto() {
 
             var c_min = Math.min(1 - r, 1 - g, 1 - b);
 
-            var c = (1 - r - c_min) / (1 - c_min);
-            var m = (1 - g - c_min) / (1 - c_min);
-            var y = (1 - b - c_min) / (1 - c_min);
+            var c = 1 - r;
+            var m = 1 - g;
+            var y = 1 - b;
 
-            c = Math.round(c * 100);
-            m = Math.round(m * 100);
-            y = Math.round(y * 100);
+            //c = Math.round(c * 100);
+            //m = Math.round(m * 100);
+            //y = Math.round(y * 100);
 
             document.getElementById('rgb_result').innerHTML = "".concat("C:", c.toString(),
                 "; M:", m.toString(),
                 "; Y:", y.toString());
         }
         else if (option == "sRGB") {
-            r = r / 255;
-            g = g / 255;
-            b = b / 255;
+
+
+            var gammaRGB = 2.2; //D65
+
+            r = 255 * (Math.pow(r, gammaRGB));
+            g = 255 * (Math.pow(g, gammaRGB));
+            b = 255 * (Math.pow(b, gammaRGB));
+            document.getElementById('rgb_result').innerHTML = "".concat("R:", r.toString(),
+                "; G:", g.toString(),
+                "; B:", b.toString());
         }
     }
 
@@ -132,58 +139,69 @@ function fromCIEXYZto() {
     var z = document.getElementById("xyz_z_value").value;
     var rgb_options = document.getElementById("xyz_options");
     var option = rgb_options.options[rgb_options.selectedIndex].text;
+    //controll if the are some invalid inputs
+    if (isNaN(Number(x)) || isNaN(Number(y)) || isNaN(Number(z))) {
+        document.getElementById('xyzresult').innerHTML = "Non a valid input";
+    } else {
+        if (option == "CIELab") {
+            x = x / 95.047; // With Weißpunkt D65
+            y = y / 100.0;
+            z = z / 108.883;
 
-    if (option == "CIELab") {
-        x = x / 95.047; // With Weißpunkt D65
-        y = y / 100.0;
-        z = z / 108.883;
+            //Calculte new X
+            if (x > 216.0 / 24389.0) {
+                x = Math.pow(x, (1 / 3))
+            }
+            else {
+                x = ( 24389.0 / 27.0 * x ) + ( 16 / 116 )
+            }
+            //Calculte new Y
+            if (y > 216.0 / 24389.0) {
+                y = Math.pow(y, (1 / 3))
+            }
+            else {
+                y = ( 24389.0 / 27.0 * y ) + ( 16 / 116 )
+            }
+            //Calculte new Z
+            if (z > 216.0 / 24389.0) {
+                z = Math.pow(z, (1 / 3))
+            }
+            else {
+                z = ( 24389.0 / 27.0 * z ) + ( 16 / 116 )
+            }
 
-        //Calculte new X
-        if (x > 0.008856) {
-            x = Math.pow(x, (1 / 3))
+            //Calculate l, a, b
+            var l = (116.0 * y) - 16.0
+            var a = 500.0 * (x - y)
+            var b = 200.0 * (y - z)
+
+            document.getElementById("xyzresult").innerHTML = "".concat("L:", l.toString(),
+                "; a:", a.toString(),
+                "; b:", b.toString());
         }
-        else {
-            x = ( 7.787 * x ) + ( 16 / 116 )
-        }
-        //Calculte new Y
-        if (y > 0.008856) {
-            y = Math.pow(y, (1 / 3))
-        }
-        else {
-            y = ( 7.787 * y ) + ( 16 / 116 )
-        }
-        //Calculte new Z
-        if (z > 0.008856) {
-            z = Math.pow(z, (1 / 3))
-        }
-        else {
-            z = ( 7.787 * z ) + ( 16 / 116 )
+        else if (option == "CIELuv") {
+
+            var up = (4.0 * parseFloat(x)) / (parseFloat(x) + (15.0 * parseFloat(y)) + (3.0 * parseFloat(z)));
+            var vp = (9.0 * parseFloat(y)) / (parseFloat(x) + 15.0 * parseFloat(y) + 3.0 * parseFloat(z));
+
+
+            //D65 X     D65 X           D65 Y           D65 Z
+            var urp = (4.0 * 95.047) / (95.047 + 15.0 * 100.0 + 3.0 * 108.883);
+            //D65 Y     D65 X           D65 Y           D65 Z
+            var vrp = (9.0 * 100.0) / (95.047 + 15.0 * 100.0 + 3.0 * 108.883);
+            //D65 Y
+            var yr = y / 100.0;
+            //Actual Intent Standard
+            var l = (yr > 0.008856) ? (116.0 * Math.pow(yr, 1.0 / 3.0) - 16.0) : ((24389.0 / 27.0) * yr);
+            var u = 13.0 * l * (up - urp);
+            var v = 13.0 * l * (vp - vrp);
+
+
+            document.getElementById("xyzresult").innerHTML = "".concat("L:", l.toString(),
+                "; u:", u.toString(),
+                "; v:", v.toString());
         }
 
-        //Calculate l, a, b
-        var l = (116 * y) - 16
-        var a = 500 * (x - y)
-        var b = 200 * (y - z)
-
-        document.getElementById("xyzresult").innerHTML = "".concat("L:", l.toString(),
-            "; a:", a.toString(),
-            "; b:", b.toString());
-    }
-    else if (option == "CIELuv") {
-        x = x / 255;
-        y = x / 255;
-        z = z / 255;
-
-        var u1 = (4 * x) / (-2 * x + 12 * y + 3);
-        var v1 = (9 * y) / (-2 * x + 12 * y + 3);
-
-        var l = 116 * (Math.pow(y / 100), 1 / 3) - 16;
-        var u = 116 * l * (u1 - 0.2009);
-        var v = 13 * l * (v1 - 0.4610);
-
-        document.getElementById("xyzresult").innerHTML = "".concat("L:", l.toString(),
-            "; u:", u.toString(),
-            "; v:", v.toString());
     }
 
 
